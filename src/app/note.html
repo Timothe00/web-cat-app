@@ -1,0 +1,45 @@
+Développement Web Front End avec Angular 11 - La Synthèse - Bases Fondamentales
+
+les minutes importantes:
+
+17:30 les methodes dans le services
+27:50 creation de la fonction onGetAllProducts() avec explications
+33:30 la variable products
+
+note:
+
+  //la fonction onGetAllProducts() va permettre d'afficher la liste des produits
+  onGetAllProducts(){
+      this.ProductsService.getAllproducts().subscribe(data=>{
+      this.products=data;
+    //la methode subscribe() permet de souscrire à ProductsService afin d'avoir accès à getAllproducts()
+    //pour pouvoir faire des manipulations.
+    //data est une variable qui va recevoir la liste
+    }
+    )
+  }
+
+<div class="container mt-3" *ngIf="products$">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>quantity</th>
+        <th>Selected</th>
+        <th>Available</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of products$|async">
+        <td>{{p.id}}</td>
+        <td>{{p.name}}</td>
+        <td>{{p.price}}</td>
+        <td>{{p.quantity}}</td>
+        <td>{{p.selected}}</td>
+        <td>{{p.available}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

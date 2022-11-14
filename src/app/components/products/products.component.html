@@ -48,6 +48,8 @@
               <th>quantity</th>
               <th>Selected</th>
               <th>Available</th>
+              <th>(Un)Select</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -58,6 +60,17 @@
               <td>{{p.quantity}}</td>
               <td>{{p.selected}}</td>
               <td>{{p.available}}</td>
+              <td>
+                <button (click)="onSelect(p)" [ngClass]="p.selected?'btn-success':'btn-danger'" class="btn btn-sm">
+                  <span *ngIf="p.selected">Unselect</span>
+                  <span *ngIf="!p.selected">Select</span>
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-danger" (click)="onDelete(p)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>

@@ -19,7 +19,7 @@ export class ProductsService {
   }
 
 
-  //creation de la methode qui permet de selectionner les produits selectionnés
+  //creation de la methode qui permet de recuperer les produits selectionnés
   //La methode getSelectedProducts() selectionne un objet de type Observable
   getSelectedProducts():Observable<Product[]>{
     let host=environment.host;
@@ -35,5 +35,17 @@ export class ProductsService {
   onSearchProducts(keyword:string):Observable<Product[]>{
     let host=environment.host;
     return this.http.get<Product[]>(host+"/products?name_like="+ keyword);
+  }
+
+  select(product:Product):Observable<Product>{
+    let host=environment.host;
+    product.selected=!product.selected;
+    return this.http.put<Product>(host+"/products/"+product.id,product);
+  }
+
+  deleteProduct(product:Product):Observable<void>{
+    let host=environment.host;
+    product.selected=!product.selected;
+    return this.http.delete<void>(host+"/products/"+product.id);
   }
 }

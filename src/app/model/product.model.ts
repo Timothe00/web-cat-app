@@ -1,4 +1,4 @@
-//les models sont utilisés pour gérer les produits
+//les models sont utilisés pour gérer les produits(ou des objets)
 
 export interface Product{
   id:number;

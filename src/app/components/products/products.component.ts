@@ -11,6 +11,7 @@ import { catchError, map, of, startWith } from 'rxjs';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
+
   //on declare l'attribut 'products' de type observable qui represente un tableau de produit
   products$!:Observable<AppDataState<Product[]>>;
   /*lorqu'on met le $ dans la variable c'est pour signifier que qu'on doit faire
@@ -66,5 +67,19 @@ export class ProductsComponent implements OnInit {
       startWith({dataState:DataStateEnum.LOADING}),
       catchError(err=>of({dataState:DataStateEnum.ERROR, errorMessage:err.message}))
     );
+  }
+
+  onSelect(p: Product){
+    this.ProductsService.select(p).subscribe(data=>{
+      p.selected=data.selected;
+    })
+  }
+
+  onDelete(p: Product){
+    let v=confirm("Êtes-vous sûr de vouloir supprimer?")
+    if(v==true)
+    this.ProductsService.deleteProduct(p).subscribe(data=>{
+      this.onGetAllProducts();
+    })
   }
 }
